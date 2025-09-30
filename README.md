@@ -1,0 +1,1 @@
+A [Boot.dev](https://www.boot.dev) project to build Static Site Generator.
