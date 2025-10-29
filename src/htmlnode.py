@@ -42,3 +42,39 @@ class LeafNode(HTMLNode):
             return self.value # Return raw unmodified text while lacking specific tag
         # Generate the HTML string
         return f"<{self.tag}{self.props_to_html()}>{self.value}</{self.tag}>"
+    
+
+
+class ParentNode(HTMLNode):
+
+    def __init__(self, tag, children, props=None):
+        # Ensure No Value allowed
+        super().__init__(tag=tag, value=None, children=children, props=props)
+        # Ensure Tag can't be None
+        if tag is None:
+            raise ValueError("A ParentNode must have a tag.")
+        # Ensure Children can't be None or be an empty list []
+        if children is None or len(children) == 0: 
+            raise ValueError("A ParentNode must have at least one child.")
+        # Ensures each Child is a HTMLNode B4 calling .to_html
+        for child in children:
+            if not isinstance(child, HTMLNode): 
+                raise ValueError("Children must be instances of HTMLNode.")
+
+
+    def to_html(self):
+        # Ensure Tag have not been manipulated to None since creation of ParentNode
+        if not self.tag:
+            raise ValueError("ParentNode must have tag to render to html.")
+     
+        # Opening HTML Tag of Parent
+        html_string = f"<{self.tag}{self.props_to_html()}>"
+
+        # Iterate over all Children to continue html_string
+        for child in self.children:
+            html_string += child.to_html() # Add child to html string
+           
+        # Close the HTML Tag    
+        html_string += f"</{self.tag}>"
+
+        return html_string
