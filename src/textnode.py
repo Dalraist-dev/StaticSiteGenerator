@@ -1,9 +1,11 @@
 # python
 
 from enum import Enum
+from htmlnode import LeafNode
+
 
 class TextType(Enum):
-    PLAIN = "plain"
+    TEXT = "text"
     BOLD = "bold"
     ITALIC = "italic"
     CODE = "code"
@@ -25,3 +27,29 @@ class TextNode:
     
     def __repr__(self): # Retrun a string representation of TextNode => TextNode(TEXT, TEXT_TYPE, URL)
         return f'TextNode({self.text}, {self.text_type.value}, {self.url})'
+
+
+
+# TextNode To HTMLNode Method
+def text_node_to_html_node(text_node):
+
+    if text_node.text_type == TextType.TEXT:
+        return LeafNode(None, text_node.text)
+    
+    if text_node.text_type == TextType.BOLD:
+        return LeafNode("b", text_node.text)
+    
+    if text_node.text_type == TextType.ITALIC:
+        return LeafNode("i", text_node.text)
+    
+    if text_node.text_type == TextType.CODE:
+        return LeafNode("code", text_node.text)
+    
+    if text_node.text_type == TextType.LINK:
+        return LeafNode("a", text_node.text, {"href": text_node.url, "target": "_blank"})
+    
+    if text_node.text_type == TextType.IMAGE:
+        return LeafNode("img", "", {"src": text_node.url, "alt": text_node.text})
+    
+    # If TextType Not Above Raist ValueError
+    raise ValueError(f"invalid text type: {text_node.text_type}")

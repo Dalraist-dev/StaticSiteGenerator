@@ -43,6 +43,9 @@ class LeafNode(HTMLNode):
         # Generate the HTML string
         return f"<{self.tag}{self.props_to_html()}>{self.value}</{self.tag}>"
     
+    def __repr__(self):
+        return f"LeafNode({self.tag}, {self.value}, {self.props})"
+    
 
 
 class ParentNode(HTMLNode):
@@ -61,7 +64,6 @@ class ParentNode(HTMLNode):
             if not isinstance(child, HTMLNode): 
                 raise ValueError("Children must be instances of HTMLNode.")
 
-
     def to_html(self):
         # Ensure Tag have not been manipulated to None since creation of ParentNode
         if not self.tag:
@@ -78,3 +80,6 @@ class ParentNode(HTMLNode):
         html_string += f"</{self.tag}>"
 
         return html_string
+    
+    def __repr__(self):
+        return f"ParentNode({self.tag}, children: {self.children}, {self.props})"
