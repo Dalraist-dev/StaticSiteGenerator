@@ -39,3 +39,6 @@ Thumbs.db
 # Environment variables - often contain secrets/API keys
 .env           
 .env.local
+
+# Log Files
+# .jsonl

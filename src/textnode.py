@@ -1,7 +1,7 @@
 # python
 
-from enum import Enum
 from htmlnode import LeafNode
+from enum import Enum
 
 
 class TextType(Enum):
@@ -26,7 +26,7 @@ class TextNode:
                 )
     
     def __repr__(self): # Retrun a string representation of TextNode => TextNode(TEXT, TEXT_TYPE, URL)
-        return f'TextNode({self.text}, {self.text_type.value}, {self.url})'
+        return f'TextNode("{self.text}", {self.text_type.value}, {self.url})'
 
 
 

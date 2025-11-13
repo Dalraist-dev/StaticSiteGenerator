@@ -42,12 +42,12 @@ class TestTextNode(unittest.TestCase):
 
     def test_repr_no_url(self):
         node = TextNode("This is a italic text node", TextType.ITALIC)
-        expected = "TextNode(This is a italic text node, italic, None)"
+        expected = 'TextNode("This is a italic text node", italic, None)'
         self.assertEqual(repr(node), expected)
 
     def test_repr_with_url(self):
         node = TextNode("Boot.Dev", TextType.LINK, "https://www.boot.dev")
-        expected = "TextNode(Boot.Dev, link, https://www.boot.dev)"
+        expected = 'TextNode("Boot.Dev", link, https://www.boot.dev)'
         self.assertEqual(repr(node), expected)
 
 
